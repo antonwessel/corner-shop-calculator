@@ -1,16 +1,40 @@
-print("Earned amount:")
-print("Bubblegum: $202")
-print("Toffee: $118")
-print("Ice cream: $2250")
-print("Milk chocolate: $1680")
-print("Doughnut: $1075")
-print("Pancake: $80")
+def read_expense(prompt):
+    while True:
+        print(prompt)
+        expense_text = input().strip()
 
-income = 202 + 118 + 2250 + 1680 + 1075 + 80
+        try:
+            expense = float(expense_text)
+        except ValueError:
+            print("Please enter a valid number.")
+            continue
+
+        if expense < 0:
+            print("Expense cannot be negative.")
+            continue
+
+        return expense
+
+
+earnings = [
+    ("Bubblegum", 202),
+    ("Toffee", 118),
+    ("Ice cream", 2250),
+    ("Milk chocolate", 1680),
+    ("Doughnut", 1075),
+    ("Pancake", 80),
+]
+
+print("Earned amount:")
+income = 0
+
+for product, amount in earnings:
+    print(f"{product}: ${amount}")
+    income += amount
+
 print(f"Income: ${income}")
 
-print("Staff expenses:")
-staff_expenses = int(input())
-print("Other expenses:")
-other_expenses = int(input())
-print(f"Net income: ${income - staff_expenses - other_expenses}")
+staff_expenses = read_expense("Staff expenses:")
+other_expenses = read_expense("Other expenses:")
+net_income = income - staff_expenses - other_expenses
+print(f"Net income: ${net_income:.2f}")
